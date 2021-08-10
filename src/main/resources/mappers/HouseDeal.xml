@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/User.xml -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="housedeal"> <!-- mybatis는 namespace필수!! -->
+   
+
+   <insert id="insert" >
+       insert into housedeal (no,dong,AptName,code,buildYear,dealYear,dealMonth,dealDay, area) 
+       values (#{no},#{dong},#{AptName},#{code},#{buildYear},#{dealYear},#{dealMonth},#{dealDay},#{area}) 
+   </insert>
+
+   <select id="selectAll" resultType="HouseDeal"> 
+   <!-- parameterType속성 생략, resultType속성 필수!! -->
+       select no,dong,AptName,code,buildYear,dealYear,dealMonth,dealDay, area
+       from housedeal
+       order by no asc 
+       limit 100
+   </select>
+   
+   <select id="select" resultType="HouseDeal">
+       select no,dong,AptName,code,buildYear,dealYear,dealMonth,dealDay, area 
+       from housedeal
+       <if test="search == 'dong'">
+         where dong LIKE CONCAT('%', #{word}, '%')
+       </if>
+       <if test="search == 'AptName'">
+         where AptName LIKE CONCAT('%', #{word}, '%')
+       </if>
+   </select>
+   
+
+   <update id="update">
+       update housedeal
+       set dong=#{dong}, AptName=#{AptName}, code=#{code}, buildYear=#{buildYear}, dealYear=#{dealYear},dealMonth=#{dealMonth}, dealDay=#{dealDay}, area=#{area}
+       where no=#{no}
+   </update>
+   
+   <delete id="delete">
+       delete from housedeal
+       where no=#{no}
+   </delete>
+   
+</mapper>    
+    
+    
+    
+    
+    
+    

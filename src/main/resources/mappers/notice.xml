@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice"> 
+   <!-- 공지사항 입력 -->
+   <insert id="insert">
+        insert into notice (title, content) values 
+        (#{title},#{content}) 
+   </insert>
+   
+   <!-- 공지사항 목록 조회 -->
+   <select id="selectAll" resultType="Notice"> <!-- resultType 속성 필수!! -->
+         select no, title, content
+         from notice
+         
+   </select>
+   
+   <!-- 공지사항 조회 -->
+   <select id="select" resultType="Notice">
+         select no, title, content
+         from notice 
+         where no=#{no}
+
+   </select>
+   
+   <!-- 공지사항 수정 -->
+   <update id="update">
+       update notice
+       set title=#{title}, content=#{content}
+       where no=#{no}
+   </update>
+   
+   <!-- 공지사항 삭제 -->
+   <delete id="delete">
+       delete from notice
+       where no=#{no}
+   </delete>
+   
+</mapper>   

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/User.xml -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aptinfo"> 
+
+   <insert id="insert" >
+       insert into apttotal (id,sido,gungu,dong,bunji,
+       aptname,yearNmonth,nanbangmethod,nanbangfuel,
+       postcode,gubuilding,dongbuilding,firestation,
+       police,bank,hospital,sportscenter,shopingcenter,
+       school,park,busnum,subwayline,
+       subway,taketime,positionx,positiony,
+	   space,area,room,bathroom,
+	   direction,doorstructure) 
+       values (#{id},#{sido},#{gungu},#{dong},#{bunji},
+       #{aptname},#{yearNmonth},#{nanbangmethod},#{nanbangfuel},
+       #{postcode},#{gubuilding},#{dongbuilding},#{firestation},
+       #{police},#{bank},#{hospital},#{sportscenter},#{shopingcenter},
+       #{school},#{park},#{busnum},#{subwayline},
+       #{subway},#{taketime},#{positionx},#{positiony},
+       #{space},#{area},#{room},#{bathroom},
+       #{direction},#{doorstructure}) 
+   </insert>
+   
+   <!-- 전체 사람 조회  R-->
+   <select id="selectAll" resultType="AptInfo"> 
+   <!-- parameterType속성 생략, resultType속성 필수!! -->
+       select id,sido,gungu,dong,bunji,
+       aptname,yearNmonth,nanbangmethod,
+       nanbangfuel,postcode,gubuilding,
+       dongbuilding,firestation,police,
+       bank,hospital,sportscenter,shopingcenter,
+       school,park,busnum,subwayline,subway,
+       taketime,positionx,positiony,space,
+       area,room,bathroom,direction,doorstructure
+       from apttotal
+       order by id desc 
+      
+   </select>
+      <select id="selectIt" resultType="AptInfo"> 
+   <!-- parameterType속성 생략, resultType속성 필수!! -->
+       select id,sido,gungu,dong,bunji,
+       aptname,yearNmonth,nanbangmethod,
+       nanbangfuel,postcode,gubuilding,
+       dongbuilding,firestation,police,
+       bank,hospital,sportscenter,shopingcenter,
+       school,park,busnum,subwayline,subway,
+       taketime,positionx,positiony,space,
+       area,room,bathroom,direction,doorstructure
+       from apttotal
+       where 1 = 1
+       <if test="nanbangmethod != null">
+        AND nanbangmethod = "중앙"
+       </if>
+       <if test="nanbangmethod == null">
+        AND nanbangmethod = "개별"
+       </if>
+       order by id desc 
+      
+   </select>
+   
+   
+   
+   <select id="selectByID" resultType="AptInfo">
+        select id,sido,gungu,dong,bunji,
+       aptname,yearNmonth,nanbangmethod,
+       nanbangfuel,postcode,gubuilding,
+       dongbuilding,firestation,police,
+       bank,hospital,sportscenter,shopingcenter,
+       school,park,busnum,subwayline,subway,
+       taketime,positionx,positiony,space,
+       area,room,bathroom,direction,doorstructure
+       from apttotal
+       where id=#{id}
+   </select>
+   
+   <select id="selectByCondition" resultType="AptInfo">
+        select id,sido,gungu,dong,bunji,
+       aptname,yearNmonth,nanbangmethod,
+       nanbangfuel,postcode,gubuilding,
+       dongbuilding,firestation,police,
+       bank,hospital,sportscenter,shopingcenter,
+       school,park,busnum,subwayline,subway,
+       taketime,positionx,positiony,space,
+       area,room,bathroom,direction,doorstructure
+       from apttotal
+       where 1=1
+       <!--  -->
+       <if test="nanbangmethod != null">
+        AND nanbangmethod LIKE #{nanbangmethod}
+       </if>
+       <if test="nanbangfuel != null">
+        AND nanbangfuel LIKE  #{nanbangfuel}
+       </if>
+       <if test="doorstructure != null">
+        AND doorstructure LIKE #{doorstructure}
+       </if>
+       <if test="room != null">
+        AND room LIKE #{room}
+       </if>
+       <if test="bathroom != null">
+        AND bathroom LIKE  #{bathroom}
+       </if>
+       <if test="spaceup != null">
+        AND space between #{ spaceup} and #{spacedown }
+       </if>
+       <if test="str1 != null">
+        AND NOT gubuilding = ''
+       </if>
+       <if test="str2 != null">
+        AND NOT dongbuilding = ''
+       </if>
+       <if test="str3 != null">
+        AND NOT police = ''
+       </if>
+       <if test="str4 != null">
+        AND NOT firestation = ''
+       </if>
+       <if test="str5 != null">
+        AND NOT bank = ''
+       </if>
+       <if test="str6 != null">
+        AND NOT hospital = ''
+       </if>
+       <if test="str7 != null">
+        AND NOT sportscenter = ''
+       </if>
+       <if test="str8 != null">
+        AND NOT shopingcenter = ''
+       </if>
+       <if test="str9 != null">
+        AND NOT school = ''
+       </if>
+       <if test="str10 != null">
+        AND NOT park = ''
+       </if>
+       <if test="str11 != null">
+        AND NOT busnum = ''
+       </if>
+       <if test="str12 != null">
+        AND NOT subway = ''
+       </if>
+       order by id desc 
+   </select>
+   
+   <update id="updateAptTotal">
+       update apttotal
+       set id=#{id},sido=#{sido},gungu=#{gungu},dong=#{dong},bunji=#{bunji},
+       aptname=#{aptname},yearNmonth=#{yearNmonth},nanbangmethod=#{nanbangmethod},nanbangfuel=#{nanbangfuel},
+       postcode=#{postcode},gubuilding=#{gubuilding},dongbuilding=#{dongbuilding},firestation=#{firestation},
+       police=#{police},bank=#{bank},hospital=#{hospital},sportscenter=#{sportscenter},shopingcenter=#{shopingcenter},
+       school=#{school},park=#{park},busnum=#{busnum},subwayline=#{subwayline},
+       subway=#{subway},taketime=#{taketime},positionx=#{positionx},positiony=#{positiony},
+       space=#{space},area=#{area},room=#{room},bathroom=#{bathroom},
+       direction=#{direction},doorstructure=#{doorstructure}
+       where id=#{id}
+   </update>
+   
+   
+   <delete id="delete">
+       delete from apttotal
+       where id=#{id}
+   </delete>
+   
+</mapper>    

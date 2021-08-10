@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+ <!-- mybatis-config.xml -->
+ 	<typeAliases>
+       <package name="com.ssafy.happyhouse.dto"/>
+    </typeAliases>
+   	<mappers>
+   		<mapper resource="mappers/notice.xml"/>
+   		<mapper resource="mappers/commerce.xml"/>
+   		<mapper resource="mappers/env.xml"/>
+   		<mapper resource="mappers/User.xml"/>
+   		<mapper resource="mappers/HouseDeal.xml"/>
+   		<mapper resource="mappers/HouseInfo.xml"/>
+   		<mapper resource="mappers/qna.xml"/>
+   		<mapper resource="mappers/oneroom.xml"/>
+   		<mapper resource="mappers/selfproduct.xml"/>  
+   		<mapper resource="mappers/aptinfo.xml"/> 		 
+   	</mappers>
+</configuration>
+
+

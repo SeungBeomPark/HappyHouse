@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+
+	<!-- QnA 전체 조회 -->
+	<select id="selectQnA" resultType="QnA">
+		select qna_no, 
+			   qna_title, 
+		       qna_content, 
+		       qna_userid,
+		       qna_datetime,
+		       reply_content,
+		       reply_datetime,
+		       reply_userid
+		from qna_board 
+		order by qna_no desc
+	</select>
+	
+	 <!-- QnA 상세 조회 -->
+   <select id="selectQnAByNo" resultType="QnA">
+           select qna_no, 
+      			  qna_title,
+                  qna_content, 
+                  qna_userid,
+                  qna_datetime, 
+                  reply_content, 
+                  reply_datetime, 
+                  reply_userid
+        from qna_board 
+        where qna_no = #{qna_no}
+   </select>
+
+   <!-- QnA 등록 -->
+   <insert id="insertQnA">
+      insert into qna_board(qna_title, qna_content, qna_userid, reply_content, reply_datetime, reply_userid) 
+      values (#{qna_title}, #{qna_content}, #{qna_userid}, #{reply_content}, #{reply_datetime}, #{reply_userid})
+   </insert>
+   
+   <!-- QnA 수정 -->
+   <update id="updateQnA">
+           update qna_board 
+           set qna_title = #{qna_title}, 
+               qna_content = #{qna_content},
+               qna_userid = #{qna_userid}, 
+               reply_content = #{reply_content},
+               reply_datetime = #{reply_datetime}, 
+               reply_userid = #{reply_userid}
+           where qna_no = #{qna_no}
+   </update>
+
+   <!-- QnA 삭제 -->
+   <delete id="deleteQnA">
+      delete from qna_board 
+       where qna_no = #{qna_no}
+   </delete>
+	
+
+</mapper>
+

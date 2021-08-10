@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/User.xml -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="houseinfo"> <!-- mybatis는 namespace필수!! -->
+   
+   <!-- no,dong,AptName,code,buildYear,jibun,lat,lng, img
+              번호, 이름, 나이, 직업 -->
+   
+ 
+   <insert id="insert" >
+       insert into houseinfo (no,dong,AptName,code,buildYear,jibun,lat,lng, img) 
+       values (#{no},#{dong},#{AptName},#{code},#{buildYear},#{jibun},#{lat},#{lng},#{img}) 
+   </insert>
+   
+
+   <select id="selectAll" resultType="HouseInfo"> 
+   <!-- parameterType속성 생략, resultType속성 필수!! -->
+       select no,dong,AptName,code,buildYear,jibun,lat,lng, img
+       from houseinfo
+       order by no desc 
+       limit 100
+   </select>
+   
+   
+   <select id="select" resultType="HouseInfo">
+       select no,dong,AptName,code,buildYear,jibun,lat,lng, img
+       from houseinfo
+		where no=#{no}
+   </select>
+   
+
+   <update id="update">
+       update houseinfo
+       set dong=#{dong}, AptName=#{AptName}, code=#{code}, buildYear=#{buildYear}, jibun=#{jibun},lat=#{lat}, lng=#{lng}, img=#{img}
+       where no=#{no}
+   </update>
+   
+   <delete id="delete">
+       delete from houseinfo
+       where no=#{no}
+   </delete>
+   
+</mapper>    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/User.xml -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user"> <!-- mybatis는 namespace필수!! -->
+   
+   <!-- id,password,name,email,phone
+              번호, 이름, 나이, 직업 -->
+   
+   <!-- 사람 입력 C -->
+   <insert id="insert" >
+       insert into userinfo (id,password,name,email,phone) 
+       values (#{id},#{password},#{name},#{email},#{phone}) 
+   </insert>
+   
+   <!-- 전체 사람 조회  R-->
+   <select id="selectAll" resultType="UserInfo"> 
+   <!-- parameterType속성 생략, resultType속성 필수!! -->
+       select id,password,name,email,phone
+       from userinfo
+       order by id desc 
+   </select>
+   
+   
+   
+   <!-- (수정폼에 출력할) 사람 조회  R -->
+   <select id="select" resultType="UserInfo">
+       select id,password,name,email,phone
+       from userinfo
+       where id=#{id}
+   </select>
+   
+   <!-- (수정폼에 입력된) 사람 수정 U -->
+   <update id="update">
+       update userinfo
+       set password=#{password}, name=#{name}, email=#{email}, phone=#{phone}
+       where id=#{id}
+   </update>
+   
+   <!-- (번호로 구분하는 )사람 삭제  D-->
+   <delete id="delete">
+       delete from userinfo
+       where no=#{no}
+   </delete>
+   
+</mapper>    
+    
+    
+    
+    
+    
+    
